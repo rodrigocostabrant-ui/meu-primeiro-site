@@ -7,6 +7,7 @@ import { whatsappLink } from "@/lib/site";
 
 export function FloatingWhatsapp() {
   const [visible, setVisible] = useState(false);
+  const href = whatsappLink();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 480);
@@ -15,11 +16,15 @@ export function FloatingWhatsapp() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Enquanto o WhatsApp não estiver configurado, não exibimos um botão que
+  // não levaria a lugar nenhum — ver src/lib/site.ts (NEXT_PUBLIC_WHATSAPP_NUMBER).
+  if (!href) return null;
+
   return (
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={whatsappLink()}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Falar no WhatsApp"

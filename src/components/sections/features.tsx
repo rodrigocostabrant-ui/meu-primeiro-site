@@ -1,51 +1,15 @@
-import {
-  BadgeCheck,
-  Gem,
-  Ruler,
-  ScanFace,
-  Truck,
-  Users,
-} from "lucide-react";
+import { BadgeCheck, Gem, Ruler, ScanFace, Truck, Users, type LucideIcon } from "lucide-react";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/ui/reveal";
+import { differentials, type DifferentialIcon } from "@/lib/site";
 
-const features = [
-  {
-    title: "Exame de precisão digital",
-    description:
-      "Refração computadorizada e topografia para um diagnóstico exato do seu grau.",
-    Icon: ScanFace,
-  },
-  {
-    title: "Atendimento personalizado",
-    description:
-      "Consultoria de estilo e ajuste facial com nossos especialistas ópticos.",
-    Icon: Users,
-  },
-  {
-    title: "Ajuste sob medida",
-    description:
-      "Regulagem milimétrica de haste, ponte e curvatura para o encaixe perfeito.",
-    Icon: Ruler,
-  },
-  {
-    title: "Curadoria de materiais nobres",
-    description:
-      "Acetatos italianos, titânio e metais preciosos selecionados a dedo.",
-    Icon: Gem,
-  },
-  {
-    title: "Garantia estendida",
-    description:
-      "12 meses de garantia em armações e lentes, com manutenção gratuita.",
-    Icon: BadgeCheck,
-  },
-  {
-    title: "Entrega expressa",
-    description:
-      "Sua armação pronta com lentes montadas em até 5 dias úteis.",
-    Icon: Truck,
-  },
-];
+const ICONS: Record<DifferentialIcon, LucideIcon> = {
+  exame: ScanFace,
+  atendimento: Users,
+  ajuste: Ruler,
+  materiais: Gem,
+  garantia: BadgeCheck,
+  entrega: Truck,
+};
 
 export function Features() {
   return (
@@ -62,15 +26,18 @@ export function Features() {
         </Reveal>
 
         <StaggerGroup className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ title, description, Icon }) => (
-            <StaggerItem key={title}>
-              <Icon className="h-7 w-7 text-gold" strokeWidth={1.5} />
-              <h3 className="mt-6 font-display text-xl">{title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink/60">
-                {description}
-              </p>
-            </StaggerItem>
-          ))}
+          {differentials.map(({ title, description, icon }) => {
+            const Icon = ICONS[icon];
+            return (
+              <StaggerItem key={title}>
+                <Icon className="h-7 w-7 text-gold" strokeWidth={1.5} />
+                <h3 className="mt-6 font-display text-xl">{title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-ink/60">
+                  {description}
+                </p>
+              </StaggerItem>
+            );
+          })}
         </StaggerGroup>
       </div>
     </section>

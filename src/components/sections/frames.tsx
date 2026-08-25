@@ -5,6 +5,9 @@ import {
   RectFrame,
   RoundFrame,
 } from "@/components/icons/frame-shapes";
+import { products } from "@/lib/products";
+import { ProductCard } from "@/components/product-card";
+import { WhatsappButton } from "@/components/whatsapp-button";
 
 const collections = [
   {
@@ -62,6 +65,45 @@ export function Frames() {
             </StaggerItem>
           ))}
         </StaggerGroup>
+
+        {/*
+          Catálogo individual de produtos — alimentado por
+          src/lib/products.ts. Enquanto nenhuma peça real for cadastrada,
+          mostramos um estado vazio elegante em vez de um grid quebrado.
+        */}
+        <div className="mt-28 border-t border-line/70 pt-20">
+          <Reveal className="max-w-xl">
+            <span className="text-[13px] tracking-[0.24em] uppercase text-gold">
+              Catálogo
+            </span>
+            <h3 className="mt-6 font-display text-balance text-3xl leading-[1.1] sm:text-4xl">
+              Peças selecionadas, prontas para experimentar.
+            </h3>
+          </Reveal>
+
+          {products.length > 0 ? (
+            <StaggerGroup className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product) => (
+                <StaggerItem key={product.id}>
+                  <ProductCard product={product} />
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          ) : (
+            <Reveal delay={0.1} className="mt-14 rounded-[28px] border border-dashed border-line bg-ivory/60 px-8 py-16 text-center">
+              <p className="mx-auto max-w-md text-[15px] leading-relaxed text-ink/55">
+                Nosso catálogo completo está sendo fotografado e catalogado
+                peça por peça. Em breve, cada armação estará disponível aqui
+                com foto, preço e disponibilidade.
+              </p>
+              <WhatsappButton
+                label="Conhecer o acervo pelo WhatsApp"
+                message="Olá! Gostaria de conhecer as armações disponíveis na Visiva."
+                className="mt-6 inline-flex items-center justify-center rounded-full border border-ink px-6 py-3 text-[13px] tracking-[0.08em] uppercase transition-colors hover:bg-ink hover:text-ivory"
+              />
+            </Reveal>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
-import { whatsappLink } from "@/lib/site";
+import { WhatsappButton } from "@/components/whatsapp-button";
 
 export function WhatsappCta() {
   return (
@@ -20,15 +20,15 @@ export function WhatsappCta() {
             diretamente pelo WhatsApp.
           </p>
 
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsappButton
+            label={
+              <>
+                <MessageCircle size={18} />
+                Chamar no WhatsApp
+              </>
+            }
             className="mt-10 inline-flex items-center gap-3 rounded-full bg-ivory px-9 py-4 text-[13px] tracking-[0.08em] uppercase text-ink transition-transform hover:scale-[1.03]"
-          >
-            <MessageCircle size={18} />
-            Chamar no WhatsApp
-          </a>
+          />
         </Reveal>
       </div>
     </section>

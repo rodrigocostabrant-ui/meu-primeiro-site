@@ -5,7 +5,8 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GlassesMark } from "@/components/icons/glasses-mark";
 import { cn } from "@/lib/utils";
-import { site, whatsappLink } from "@/lib/site";
+import { site } from "@/lib/site";
+import { WhatsappButton } from "@/components/whatsapp-button";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,14 +56,10 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsappButton
+            label="Agendar horário"
             className="inline-flex items-center rounded-full border border-ink px-6 py-2.5 text-[13px] tracking-[0.08em] uppercase transition-colors hover:bg-ink hover:text-ivory"
-          >
-            Agendar horário
-          </a>
+          />
         </div>
 
         <button
@@ -95,15 +92,11 @@ export function Header() {
                   {item.label}
                 </a>
               ))}
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
+              <WhatsappButton
+                label="Agendar horário"
                 onClick={() => setOpen(false)}
                 className="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-[13px] tracking-[0.08em] uppercase text-ivory"
-              >
-                Agendar horário
-              </a>
+              />
             </nav>
           </motion.div>
         )}
